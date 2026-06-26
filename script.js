@@ -262,7 +262,30 @@ img.style.transform="scale(1)";
 });
 
 });
+window.addEventListener("load", () => {
 
+setTimeout(() => {
+
+document
+.getElementById("loader")
+.classList.add("hide");
+
+},1500);
+
+});
+const progress=document.getElementById("progress");
+
+window.addEventListener("scroll",()=>{
+
+const scrollTop=window.scrollY;
+
+const docHeight=document.documentElement.scrollHeight-window.innerHeight;
+
+const progressWidth=(scrollTop/docHeight)*100;
+
+progress.style.width=progressWidth+"%";
+
+});
 
 // ==============================
 // Console Message

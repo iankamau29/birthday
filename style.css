@@ -1,5 +1,5 @@
 /* ==================================================
-   1. RESET & VARIABLE INITIALIZATIONS
+   1. RESET & INITIAL VARIABLE DESIGN SYSTEM
 ================================================== */
 * {
     margin: 0;
@@ -7,12 +7,20 @@
     box-sizing: border-box;
 }
 
+/* Custom CSS Property for smooth gradient rotation ring on profile */
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
 :root {
     --pink: #ff4f8b;
     --pink2: #ff7eb3;
     --pink3: #ffb6c1;
     --white: #ffffff;
-    --glass: rgba(255,255,255,.14);
+    --glass: rgba(255, 255, 255, 0.12);
+    --glass-glow: rgba(255, 79, 139, 0.2);
 }
 
 html {
@@ -26,28 +34,39 @@ body {
     background: linear-gradient(-45deg, #ff4f8b, #ff7eb3, #ffb6c1, #ff6f91);
     background-size: 400% 400%;
     animation: gradient 14s ease infinite;
-    padding-bottom: 60px; /* Footer spacing */
+    padding-bottom: 80px;
 }
 
 /* ==================================================
-   2. GLOBAL UTILITIES & TYPOGRAPHY
+   2. TYPOGRAPHY & SELECTION LUXURY GLOW
 ================================================== */
 h1 {
     font-size: clamp(2.8rem, 7vw, 5rem);
     text-align: center;
-    text-shadow: 0 0 15px rgba(255,255,255,.7), 0 0 30px rgba(255,255,255,.35);
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.2);
+}
+
+/* Tip: Wrap the birthday person's name in a <span> to invoke this custom glow style */
+h1 span {
+    color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px var(--pink2), 0 0 40px #ff2d75;
+    animation: pulseGlow 3s ease-in-out infinite alternate;
 }
 
 h2 {
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     text-align: center;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(255,255,255,.5);
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
 p {
     font-size: clamp(1rem, 2vw, 1.15rem);
     line-height: 1.9;
+    font-weight: 400;
 }
 
 ::selection {
@@ -55,7 +74,7 @@ p {
     color: #ff2d75;
 }
 
-/* Smooth Webkit Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -63,67 +82,68 @@ p {
     background: #ffb6c1;
 }
 ::-webkit-scrollbar-thumb {
-    background: #ff4f8b;
+    background: linear-gradient(180deg, var(--pink), #ff2d75);
     border-radius: 20px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #ff2d75;
 }
 
 /* ==================================================
-   3. LAYOUT & INTERACTIVE ELEMENTS (BUTTONS/GLASS)
+   3. STRUCTURAL GLASS CONTAINERS & LUXE SHINE
 ================================================== */
 section {
     position: relative;
     width: min(92%, 1200px);
     margin: 60px auto;
-    padding: clamp(25px, 4vw, 45px);
-    border-radius: 30px;
-    background: rgba(255,255,255,.12);
-    backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,.18);
-    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+    padding: clamp(30px, 5vw, 55px);
+    border-radius: 40px; /* Softer premium rounding */
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.16), rgba(255,255,255,0.08));
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1);
     overflow: hidden;
     z-index: 5;
-    transition: transform .4s, box-shadow .4s;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
 }
 
 section:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 25px 50px rgba(0,0,0,.3);
+    transform: translateY(-8px);
+    box-shadow: 0 35px 60px rgba(255, 79, 139, 0.25), 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Premium Glass Shine Effect */
+/* Elegant light sweeping animation over glass containers */
 section::before {
     content: "";
     position: absolute;
     left: -150%;
     top: 0;
-    width: 80%;
+    width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
-    transform: skewX(-25deg);
-    transition: 1.2s;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: skewX(-30deg);
+    transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 section:hover::before {
     left: 160%;
 }
 
+/* Premium Tactile Buttons */
 button {
     overflow: hidden;
     position: relative;
-    padding: 16px 35px;
+    padding: 18px 40px;
     margin-top: 30px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
     color: white;
-    background: linear-gradient(45deg, #ff2d75, #ff6fa8);
-    transition: .35s;
-    box-shadow: 0 15px 35px rgba(255,45,117,.35);
+    background: linear-gradient(45deg, #ff2d75, #ff6fa8, #ff2d75);
+    background-size: 200% auto;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 12px 30px rgba(255, 45, 117, 0.4);
 }
 
 button::after {
@@ -134,27 +154,28 @@ button::after {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(255,255,255,.35);
+    background: rgba(255, 255, 255, 0.4);
     transform: translate(-50%, -50%);
-    transition: .45s;
+    transition: width 0.6s, height 0.6s;
 }
 
 button:hover {
-    transform: translateY(-5px) scale(1.04);
-    box-shadow: 0 20px 45px rgba(255,45,117,.45);
+    transform: translateY(-4px) scale(1.03);
+    background-position: right center;
+    box-shadow: 0 20px 40px rgba(255, 45, 117, 0.6);
 }
 
 button:hover::after {
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
 }
 
 button:active {
-    transform: scale(.96);
+    transform: scale(0.95);
 }
 
 /* ==================================================
-   4. CORE WEB SECTIONS (HERO, GALLERY, VIDEOS, ETC.)
+   4. CONTENT MODULES (HERO, GALLERY, VIDEOS)
 ================================================== */
 .hero {
     min-height: 100vh;
@@ -166,16 +187,27 @@ button:active {
     padding: 40px 20px;
 }
 
+/* Magically Rotating Dynamic Border around Profile Picture */
+.profile-wrapper {
+    position: relative;
+    width: 246px;
+    height: 246px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: conic-gradient(from var(--gradient-angle), transparent, #ffffff, var(--pink2), transparent, #ffffff);
+    animation: rotateBorder 4s linear infinite, floatPhoto 6s ease-in-out infinite;
+}
+
 .profile {
     width: 230px;
     height: 230px;
     object-fit: cover;
     border-radius: 50%;
-    border: 8px solid white;
-    box-shadow: 0 0 25px rgba(255,255,255,.7), 0 20px 40px rgba(0,0,0,.35);
-    /* Float animation takes main priority, combined entry state handled gracefully via wrapper or script */
-    animation: floatPhoto 5s ease-in-out infinite;
-    margin-bottom: 25px;
+    border: 4px solid white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
 }
 
 #typing {
@@ -193,11 +225,11 @@ button:active {
     white-space: pre-line;
 }
 
-/* Photo Gallery */
+/* Advanced Cinematic Image Gallery Grid */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 22px;
+    gap: 25px;
     margin-top: 30px;
 }
 
@@ -205,22 +237,22 @@ button:active {
     width: 100%;
     aspect-ratio: 4/5;
     object-fit: cover;
-    border-radius: 22px;
+    border-radius: 24px;
     cursor: pointer;
-    border: 3px solid rgba(255,255,255,.25);
-    transition: .45s ease;
-    box-shadow: 0 10px 25px rgba(0,0,0,.25);
-    filter: brightness(.96);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    filter: brightness(0.93) contrast(1.02);
 }
 
 .gallery img:hover {
-    transform: translateY(-10px) scale(1.04);
-    box-shadow: 0 25px 45px rgba(0,0,0,.35);
-    border-color: white;
-    filter: brightness(1.08);
+    transform: translateY(-12px) scale(1.05) rotate(1deg);
+    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 1);
+    filter: brightness(1.08) contrast(1.05);
 }
 
-/* Video Gallery */
+/* Premium Video Cards Layout */
 .videos p {
     text-align: center;
     max-width: 750px;
@@ -230,23 +262,25 @@ button:active {
 .video-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
+    gap: 35px;
     margin-top: 30px;
 }
 
 .video-card {
-    background: rgba(255,255,255,.12);
-    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,.18);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(15px);
-    transition: .4s;
-    box-shadow: 0 15px 35px rgba(0,0,0,.25);
+    -webkit-backdrop-filter: blur(15px);
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .video-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 30px 60px rgba(0,0,0,.4);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(255, 79, 139, 0.15), 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255,255,255,0.4);
 }
 
 .video-card video {
@@ -254,74 +288,79 @@ button:active {
     width: 100%;
     aspect-ratio: 9/16;
     object-fit: cover;
-    background: black;
+    background: #000;
     border: none;
     outline: none;
 }
 
 .video-card p {
-    padding: 18px;
-    font-size: 1rem;
+    padding: 20px;
+    font-size: 1.05rem;
     font-weight: 600;
     text-align: center;
 }
 
-/* Reasons */
+/* Reasons Left Accent Pill Box */
 .reason {
-    padding: 18px;
-    margin: 15px 0;
-    background: rgba(255,255,255,.12);
-    border-radius: 18px;
-    border-left: 6px solid white;
-    transition: .35s;
-    font-size: 1.1rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,.18);
+    padding: 20px 25px;
+    margin: 18px 0;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    border-left: 6px solid #ffffff;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    font-size: 1.15rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .reason:hover {
-    transform: translateX(10px);
-    background: rgba(255,255,255,.18);
+    transform: translateX(12px);
+    background: rgba(255, 255, 255, 0.18);
+    border-left-color: #ff2d75;
+    box-shadow: 0 15px 30px rgba(255, 45, 117, 0.15);
 }
 
-/* Cake Section */
+/* Floating Interactive Cake */
 .cake {
     text-align: center;
 }
 
 #birthdayCake {
-    font-size: 110px;
+    font-size: 120px;
     margin: 25px 0;
-    animation: cakeFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 15px 25px rgba(255, 255, 255, 0.3));
+    animation: cakeFloat 3.5s ease-in-out infinite;
+    display: inline-block;
 }
 
 #cakeBtn {
     margin-top: 10px;
 }
 
-/* Countdown */
+/* Countdown Clock Look */
 .countdown {
     text-align: center;
 }
 
 #counter {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: 1px;
     margin-top: 20px;
-    text-shadow: 0 0 15px white;
+    text-shadow: 0 0 20px #ffffff, 0 0 40px rgba(255, 255, 255, 0.3);
 }
 
-/* Final Message */
+/* Final Message Window */
 .finalMessage {
     text-align: center;
 }
 
 .finalMessage h1 {
     font-size: clamp(2.8rem, 7vw, 5rem);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .finalMessage p {
-    max-width: 700px;
+    max-width: 750px;
     margin: auto;
     line-height: 2;
 }
@@ -332,11 +371,11 @@ button:active {
 
 /* Section Spacing Adjustments */
 .gallerySection, .videos, .quotes, .cake, .countdown, .finalMessage {
-    margin-top: 70px;
+    margin-top: 80px;
 }
 
 /* ==================================================
-   5. SPECIAL SPECIAL EFFECTS (PARTICLES & CANVASES)
+   5. DECORATIVE PARTICLE LAYER EFFECTS 
 ================================================== */
 #progress {
     position: fixed;
@@ -344,10 +383,10 @@ button:active {
     left: 0;
     width: 0%;
     height: 5px;
-    background: linear-gradient(90deg, #ffffff, #ffe6f1);
-    box-shadow: 0 0 20px white;
+    background: linear-gradient(90deg, #ffffff, #ffb6c1, #ffffff);
+    box-shadow: 0 0 25px #ffffff, 0 0 10px #ff4f8b;
     z-index: 9999;
-    transition: width .1s linear;
+    transition: width 0.15s linear;
 }
 
 #hearts {
@@ -368,6 +407,7 @@ button:active {
     pointer-events: none;
     animation: floatHeart linear forwards;
     z-index: 2;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
 }
 
 .sparkle {
@@ -391,11 +431,11 @@ button:active {
     z-index: 999;
 }
 
-/* Reveal On Scroll Utility Class */
+/* Reveal Utilities */
 .reveal {
     opacity: 0;
-    transform: translateY(60px);
-    transition: 1s;
+    transform: translateY(50px);
+    transition: opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
 .reveal.active {
@@ -404,7 +444,7 @@ button:active {
 }
 
 /* ==================================================
-   6. LOADING SCREEN SYSTEM
+   6. SPLASH INTRO PRE-LOADER SCREEN
 ================================================== */
 #loader {
     position: fixed;
@@ -419,7 +459,7 @@ button:active {
     gap: 20px;
     background: linear-gradient(135deg, #ff4f8b, #ff6fa8, #ffb6c1);
     z-index: 999999;
-    transition: opacity .8s ease, visibility .8s ease;
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
 }
 
 #loader.hide {
@@ -428,24 +468,28 @@ button:active {
 }
 
 .loader-heart {
-    font-size: 90px;
-    animation: heartbeat 1.3s infinite;
+    font-size: 100px;
+    filter: drop-shadow(0 10px 25px rgba(255,255,255,0.4));
+    animation: heartbeat 1.2s infinite ease-in-out;
 }
 
 #loader p {
     margin: 0;
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
     color: white;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .loading-bar {
-    width: 220px;
+    width: 240px;
     height: 8px;
-    background: rgba(255,255,255,.25);
+    background: rgba(255, 255, 255, 0.25);
     border-radius: 20px;
     overflow: hidden;
     margin-top: 15px;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
 }
 
 .loading-bar span {
@@ -453,11 +497,12 @@ button:active {
     height: 100%;
     width: 0;
     background: white;
-    animation: loading 2s forwards;
+    box-shadow: 0 0 10px white;
+    animation: loading 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* ==================================================
-   7. KEYFRAME ANIMATIONS
+   7. TIMED KEYFRAME ANIMATIONS
 ================================================== */
 @keyframes gradient {
     0% { background-position: 0% 50%; }
@@ -465,30 +510,34 @@ button:active {
     100% { background-position: 0% 50%; }
 }
 
+@keyframes rotateBorder {
+    to { --gradient-angle: 360deg; }
+}
+
 @keyframes floatPhoto {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    50% { transform: translateY(-18px); }
 }
 
 @keyframes cakeFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
 }
 
 @keyframes floatHeart {
-    0% { transform: translateY(0) scale(.5); opacity: 1; }
-    100% { transform: translateY(-120vh) scale(1.6); opacity: 0; }
+    0% { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-125vh) scale(1.6); opacity: 0; }
 }
 
 @keyframes sparkle {
     0% { opacity: 0; transform: scale(0); }
     20% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: translateY(-150px) scale(0); }
+    100% { opacity: 0; transform: translateY(-160px) scale(0); }
 }
 
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.25); }
+    50% { transform: scale(1.22); }
 }
 
 @keyframes loading {
@@ -501,34 +550,41 @@ button:active {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Entry Animation assignments */
-.hero h1, .hero h2, .hero p, .hero button {
-    animation: fadeUp 1.2s ease both;
+@keyframes pulseGlow {
+    from { text-shadow: 0 0 10px #fff, 0 0 20px var(--pink2), 0 0 30px #ff2d75; }
+    to { text-shadow: 0 0 15px #fff, 0 0 30px #ff2d75, 0 0 50px #ff0055; }
 }
-.hero h2 { animation-delay: .2s; }
-.hero p { animation-delay: .4s; }
-.hero button { animation-delay: .6s; }
+
+/* Entry Transitions assignment */
+.hero h1, .hero h2, .hero p, .hero button, .profile-wrapper {
+    animation: fadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero h2 { animation-delay: 0.2s; }
+.hero p { animation-delay: 0.4s; }
+.hero button { animation-delay: 0.6s; }
 
 
 /* ==================================================
-   8. RESPONSIVE DESIGN (MEDIA QUERIES)
+   8. COMPREHENSIVE RESPONSIVE DESIGN BREAKPOINTS
 ================================================== */
 
 /* Mobile Phones */
 @media(max-width:768px){
     body { font-size: 16px; }
     .hero { padding: 25px; }
+    .profile-wrapper { width: 186px; height: 186px; }
     .profile { width: 170px; height: 170px; }
     .hero h1 { font-size: 2.4rem; }
     .hero h2 { font-size: 1.4rem; }
     #typing { font-size: 1rem; min-height: 90px; }
-    section { width: 94%; padding: 22px; margin: 35px auto; }
+    section { width: 94%; padding: 22px; margin: 35px auto; border-radius: 28px; }
     .gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .gallery img { aspect-ratio: 1; }
+    .gallery img { aspect-ratio: 1; border-radius: 16px; }
     .video-gallery { grid-template-columns: 1fr; }
-    .video-card video { height: 70vh; }
+    .video-card video { height: 65vh; }
+    .video-card { border-radius: 20px; }
     button { width: 100%; font-size: 1rem; padding: 18px; }
-    #birthdayCake { font-size: 80px; }
+    #birthdayCake { font-size: 90px; }
     #counter { font-size: 2.4rem; }
     .finalMessage h1 { font-size: 2.6rem; }
 }
@@ -547,17 +603,18 @@ button:active {
     .hero { padding: 60px; }
 }
 
-/* Large Screens */
+/* Large Displays */
 @media(min-width:1600px){
     body { font-size: 20px; }
     section { max-width: 1500px; }
     .gallery { grid-template-columns: repeat(5, 1fr); }
     .video-gallery { grid-template-columns: repeat(3, 1fr); }
+    .profile-wrapper { width: 276px; height: 276px; }
     .profile { width: 260px; height: 260px; }
     .hero h1 { font-size: 5rem; }
 }
 
-/* TVs & Ultrawides */
+/* ultra-wide Screens & TVs */
 @media(min-width:2200px){
     body { font-size: 24px; }
     section { max-width: 1800px; }
@@ -565,5 +622,6 @@ button:active {
     .video-gallery { grid-template-columns: repeat(4, 1fr); }
     .hero h1 { font-size: 6rem; }
     .hero h2 { font-size: 3rem; }
+    .profile-wrapper { width: 336px; height: 336px; }
     .profile { width: 320px; height: 320px; }
 }
